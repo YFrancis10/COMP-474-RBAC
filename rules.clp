@@ -101,14 +101,6 @@
 ;; Rule 10: Any matching role is sufficient (covered by grant rules using any binding)
 
 ;; Rule 11: Deny on role conflict — grant and deny both exist
-(defrule deny-on-conflict
-   (declare (salience 95))
-   (decision (result grant))
-   (decision (result deny))
-   =>
-   (retract-grant-and-assert-deny))
-
-;; Implemented more precisely:
 (defrule resolve-conflict-deny-wins
    (declare (salience 95))
    ?g <- (decision (result grant))
