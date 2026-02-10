@@ -126,19 +126,12 @@
    =>
    (assert (decision (result deny) (reason "Default deny: no rule explicitly granted access"))))
 
-;;; Explanation Rules (15-16)
+;;; Explanation Rules (15)
 
-;; Rule 15: Explain denial due to missing permission
-(defrule explain-deny-no-permission
+;; Rule 15: Explain any denial
+(defrule explain-deny
    (declare (salience 30))
-   (decision (result deny) (reason ?r&"No assigned role permits this action"))
-   =>
-   (printout t "EXPLANATION: Access denied — " ?r crlf))
-
-;; Rule 16: Explain denial due to ownership
-(defrule explain-deny-ownership
-   (declare (salience 30))
-   (decision (result deny) (reason ?r&"Action requires ownership; user is not the owner"))
+   (decision (result deny) (reason ?r))
    =>
    (printout t "EXPLANATION: Access denied — " ?r crlf))
 
