@@ -19,7 +19,4 @@
 
    ;; Resources
    (resource (id doc1) (type document) (owner alice) (state active))
-
-   ;; Access request
-   (access-request (user bob) (action edit) (resource doc1))
 )
