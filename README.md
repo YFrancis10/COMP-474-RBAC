@@ -5,3 +5,8 @@ Load in following order:
 (load "rules.clp")
 (reset)
 (run)
+
+For debugging include:
+
+(watch rules)
+(watch facts)
