@@ -13,6 +13,7 @@
    (resource (id ?r) (type ?type))
    (not (and (user-role (user ?u) (role ?role))
              (permission (role ?role) (action ?a) (resource ?type))))
+   (not (decision))
    =>
    (assert (decision (result deny) (reason "No assigned role permits this action"))))
 

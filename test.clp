@@ -1,6 +1,7 @@
 ;; Test 1: Valid access — bob edits active doc1
 (printout t crlf "=== TEST 1: Bob edits active doc1 (expect GRANT) ===" crlf)
 (reset)
+(assert (access-request (user bob) (action edit) (resource doc1)))
 (run)
 
 ;; Test 2: Unauthorized action — bob deletes doc1
