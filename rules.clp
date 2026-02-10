@@ -16,13 +16,13 @@
    =>
    (assert (decision (result deny) (reason "No assigned role permits this action"))))
 
-;; Rule 3: Grant if role permits action on resource type
+;; Rule 3: Grant if role permits action (state-agnostic)
 (defrule grant-permitted-action
    (declare (salience 50))
    (access-request (user ?u) (action ?a) (resource ?r))
    (user-role (user ?u) (role ?role))
    (permission (role ?role) (action ?a) (resource ?type))
-   (resource (id ?r) (type ?type) (state active))
+   (resource (id ?r) (type ?type))
    =>
    (assert (decision (result grant) (reason "Role permits action on resource"))))
 
@@ -85,10 +85,9 @@
    =>
    (assert (decision (result deny) (reason "Cannot modify archived resource"))))
 
-;; Rule 9: Allow modification on active resources (handled by grant rules above via state active check)
-;; This rule exists as explicit documentation
+;; Rule 9: Grant modification only on active resources (more specific)
 (defrule allow-active-modification
-   (declare (salience 50))
+   (declare (salience 55))
    (access-request (user ?u) (action ?a&edit|delete) (resource ?r))
    (resource (id ?r) (type ?type) (state active))
    (user-role (user ?u) (role ?role))
